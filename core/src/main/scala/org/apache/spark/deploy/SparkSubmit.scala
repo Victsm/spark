@@ -185,6 +185,7 @@ object SparkSubmit {
       // Standalone cluster only
       OptionAssigner(args.driverMemory, STANDALONE, CLUSTER, clOption = "--memory"),
       OptionAssigner(args.driverCores, STANDALONE, CLUSTER, clOption = "--cores"),
+      OptionAssigner(args.jars, STANDALONE, CLUSTER, sysProp = "spark.jars"),
 
       // Yarn client only
       OptionAssigner(args.queue, YARN, CLIENT, sysProp = "spark.yarn.queue"),
@@ -205,7 +206,6 @@ object SparkSubmit {
       OptionAssigner(args.jars, YARN, CLUSTER, clOption = "--addJars"),
 
       // Other options
-      OptionAssigner(args.jars, STANDALONE, CLUSTER, sysProp = "spark.jars"),
       OptionAssigner(args.executorMemory, STANDALONE | MESOS | YARN, ALL_DEPLOY_MODES,
         sysProp = "spark.executor.memory"),
       OptionAssigner(args.totalExecutorCores, STANDALONE | MESOS, ALL_DEPLOY_MODES,
